@@ -1,45 +1,44 @@
 app-umbraco Cookbook
 ====================
-TODO: Enter the cookbook description here.
+Installs Umbraco CMS on Windows
 
-e.g.
-This cookbook makes your favorite breakfast sandwhich.
+and makes your favorite wheat-free breakfast sandwhich.
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
-
-e.g.
-#### packages
-- `toaster` - app-umbraco needs toaster to brown your bagel.
+needs a windoze
 
 Attributes
-----------
-TODO: List you cookbook attributes here.
+---------
 
-e.g.
-#### app-umbraco::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['app-umbraco']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+['mysql']['version'] = "5.6.14.0"
+['mysql']['checksum'] = "7ca554bcda5d859e71b97f2ed13ec42b"
+
+['mysql']['installer_file'] = \
+  "mysql-installer-community-#{node['mysql']['version']}.msi"
+
+['mysql']['base_url'] =\
+  "http://dev.mysql.com/get/Downloads/MySQLInstaller/"
+
+['mysql']['url'] = \
+  "#{node['mysql']['base_url']}/#{node['mysql']['installer_file']}"
+
+['mysql']['basedir'] = \
+  "#{ENV['SYSTEMDRIVE']}\\Program Files (x86)\\MySQL\\"
+
+  ['mysql']['installer_cli'] = %Q[
+    c:\\Program\ Files\ (x86)\\mySql\\MySQL\ Installer\\MySQLInstallerConsole.exe
+    --config=mysql-server-5.6-winx64:passwd=root
+    --product=mysql-server-5.6-winx64
+    --catalog=mysql-5.6-winx64
+    --action=install
+    --type=full
+    --nowait ]
 
 Usage
 -----
 #### app-umbraco::default
-TODO: Write usage instructions for each cookbook.
 
-e.g.
 Just include `app-umbraco` in your node's `run_list`:
 
 ```json
@@ -53,7 +52,6 @@ Just include `app-umbraco` in your node's `run_list`:
 
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
 
 e.g.
 1. Fork the repository on Github
@@ -65,4 +63,4 @@ e.g.
 
 License and Authors
 -------------------
-Authors: TODO: List authors
+Authors: Azul
