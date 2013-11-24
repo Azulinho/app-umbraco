@@ -12,6 +12,7 @@ include_recipe "ms_dotnet4"
 # wrapping ms_dotnet45, as it was failling to download the goods
 include_recipe "wrappers::ms_dotnet45"
 include_recipe "wrappers::install-IIS-roles"
+include_recipe "wrappers::enable-RDP"
 include_recipe "7-zip"
 include_recipe "webpi"
 # opscode mysql cookbook is failling during compilation phase on windows
